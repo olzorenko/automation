@@ -1,0 +1,41 @@
+---
+- name: Update apt cache First
+   apt: update_cache=yes
+   register: cacheok1
+   tags:
+    - java
+
+ - name: Add java 8 repository
+   apt_repository: repo='ppa:webupd8team/java' state=present
+   register: repook
+   when: cacheok1|success
+   tags:
+    - java
+    - repo
+
+ - name: Update apt cache Second
+   apt: update_cache=yes
+   register: cacheok2
+   when: repook|success
+   tags:
+    - java
+
+
+ - name: Accept Java 8 Licence
+   shell: echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | tee /etc/oracle-java-8-licence-acceptance | /usr/bin/debconf-set-selections
+   args:
+     creates: /etc/oracle-java-8-licence-acceptance
+     tags:
+      - java
+
+
+ - name: Installing java 8
+   apt: pkg={{ item }} state=latest update_cache=yes
+   when: (repook|success) or (cacheok2|success)
+   with_items:
+    - oracle-java8-installer
+    - ca-certificates
+    - oracle-java8-set-default
+   tags:
+    - java
+

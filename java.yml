@@ -1,0 +1,7 @@
+---
+
+-  hosts: web
+   user: admin
+   sudo: yes
+   roles:
+    - java

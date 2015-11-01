@@ -1,0 +1,22 @@
+---
+
+ admin_user_public_key: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDKDDmpjYq96/uIxHKmjfZINZZGNQ8639SoZ7mAB0pCg6MIrsZL3BA0fkVIL6LDmnzAu4FTVhY1K2U2mzaxLoRz
+C/13nP90uk2vLxev8uubVkepU2QWUwRoaJ1ScxbGkYBoyq/ZO0HvKLN6Dj/fmSytfW4xdl9mPxiaHCm6lbc92Si66SYwwNsNU9FTkUmSXEj831TDOkK3v+Q/gs7u
+gN6xj1vbl6REZrMsDgJtaAt6j7uNFF3nTIMLMbRx0Lp48eISIKtgUHQSY7qH7Y/SltQ4pA9J8wQcWAGRUlIXXjYwWPjjD15v2OBTrJ3U86heIPuKj3C+OPd8f/cU
+K+l6IZLB admin@precise32"
+
+ software_to_install:
+  - wget
+  - curl
+  - htop
+  - zip
+  - gzip
+  - screen
+  - software-properties-common
+  - python-software-properties
+
+ dns_servers: 
+  - 
+    1: '8.8.4.4'
+    2: '8.8.0.0'
+  

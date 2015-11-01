@@ -1,0 +1,36 @@
+---
+ - user: admin
+   hosts: jenkins
+   sudo: yes
+   tasks:
+   - name: Add jenkins apt-key
+     action: apt_key url=http://pkg.jenkins-ci.org/debian/jenkins-ci.org.key state=present
+     register: keyinstalled
+
+   - name: Install pycurl
+     apt: name=python-pycurl state=latest
+
+   - name: Add Jenkins repository
+     action: apt_repository repo='deb http://pkg.jenkins-ci.org/debian binary/' state=present update_cache=yes
+     register: repoinstalled
+     when: keyinstalled|success
+
+   - name: Update apt cache
+     apt: update_cache=yes
+     when: repoinstalled|success
+
+   - name: Remove old java version
+     apt: name=openjdk-6* state=absent
+
+   - name: Install java, apache, jenkins
+     apt: name={{ item }} state=latest
+     with_items:
+         - openjdk-7-jdk
+         - apache2
+         - jenkins
+     notify: Jenkins start
+
+   handlers:
+     
+     name: Jenkins start
+     service: name=jenkins state=started

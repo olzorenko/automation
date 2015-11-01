@@ -1,0 +1,15 @@
+---
+ - name: Install new DNS server
+   template: src=resolv.conf.j2 dest=/etc/resolv.conf
+   register: dnsok
+   with_items: dns_servers
+   tags:
+    - common
+
+ - name: Install common software
+   apt: pkg={{ item }} state=latest update_cache=yes
+   when: dnsok|success
+   with_items: software_to_install
+   tags:
+    - common
+    - software

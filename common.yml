@@ -1,0 +1,6 @@
+---
+ - hosts: web 
+   sudo: yes
+   user: admin
+   roles:
+   - common
