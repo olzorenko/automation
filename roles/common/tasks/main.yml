@@ -6,6 +6,12 @@
    tags:
     - common
 
+ - name: Creating temp directory
+   file: path=/opt/src state=directory mode=0777
+   tags:
+    - common
+    - dir
+
  - name: Install common software
    apt: pkg={{ item }} state=latest update_cache=yes
    when: dnsok|success

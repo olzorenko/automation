@@ -8,3 +8,10 @@
 
  - name: Creating kibana user
    user: name=kibana uid=999 group=kibana
+   when: kibanagroupok|success
+   register: kibanauserok
+
+ - name: Creating directory for Kibana
+   file: path=/opt/kibana state=directory mode=0755 owner=kibana group=kibana
+   when: kibanauserok|success
+   register: kibanadirok
