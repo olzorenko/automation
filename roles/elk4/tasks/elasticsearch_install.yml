@@ -1,0 +1,25 @@
+---
+ - name: Add ElasticSearch GPG key to apt
+   apt_key: url="https://packages.elastic.co/GPG-KEY-elasticsearch" state=present
+   register: eskeyok
+   tags:
+    - install_es
+
+ - name: Creating ElasticSearch source list
+   apt_repository: repo='deb http://packages.elastic.co/elasticsearch/2.x/debian stable main' state=present
+   when: eskeyok|success
+   tags:
+    - install_es
+
+ - name: Update apt cache
+   apt: update_cache=true
+   register: cacheupdatedok
+
+ - name: Install Elastic Search
+   apt: pkg=elasticsearch state=present
+   when: eskeyok|success and cacheupdatedok|success
+   notify:
+    - ElasticSearch start
+    - ElasticSearch restart
+
+ - debug: msg="Nginx is installed"

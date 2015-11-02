@@ -1,0 +1,10 @@
+---
+ - name: Creating kibana group
+   group: name=kibana gid=999 state=present
+   register: kibanagroupok
+   tags:
+    - users
+    - kibana
+
+ - name: Creating kibana user
+   user: name=kibana uid=999 group=kibana
