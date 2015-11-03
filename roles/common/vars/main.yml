@@ -19,4 +19,5 @@ K+l6IZLB admin@precise32"
   - 
     1: '8.8.4.4'
     2: '8.8.0.0'
-  
+   
+ temp_dir: /opt/src 

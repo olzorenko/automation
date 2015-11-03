@@ -1,4 +1,5 @@
 ---
+
  - name: Install new DNS server
    template: src=resolv.conf.j2 dest=/etc/resolv.conf
    register: dnsok
@@ -7,7 +8,7 @@
     - common
 
  - name: Creating temp directory
-   file: path=/opt/src state=directory mode=0777
+   file: path={{ temp_dir }} state=directory mode=0777
    tags:
     - common
     - dir
