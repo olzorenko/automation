@@ -1,6 +1,7 @@
 ---
-- name: Update apt cache First
-   apt: update_cache=yes
+
+ - name: Update apt cache First
+   apt: update_cache=true
    register: cacheok1
    tags:
     - java
@@ -14,7 +15,7 @@
     - repo
 
  - name: Update apt cache Second
-   apt: update_cache=yes
+   apt: update_cache=true
    register: cacheok2
    when: repook|success
    tags:
@@ -38,4 +39,3 @@
     - oracle-java8-set-default
    tags:
     - java
-

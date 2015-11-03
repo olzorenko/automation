@@ -1,6 +1,6 @@
 ---
 
  - name: Restricting outside access
-   lineinfile: dest=/etc/elasticsearch/elasticsearch.yml line="network.host: localhost"
+   lineinfile: 'dest=/etc/elasticsearch/elasticsearch.yml line="network.host: localhost"'
    notify:
     - ElasticSearch restart

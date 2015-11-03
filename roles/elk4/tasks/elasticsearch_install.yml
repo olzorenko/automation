@@ -22,4 +22,4 @@
     - ElasticSearch start
     - ElasticSearch restart
 
- - debug: msg="Nginx is installed"
+ - debug: msg="ElasticSearch is installed"

@@ -26,6 +26,11 @@ localhost
 192.168.33.12
 192.168.33.29
 
+[log]
+192.168.33.25
+#192.168.33.29
+
+
 #[webservers]
 #alpha.example.org
 #beta.example.org
