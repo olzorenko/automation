@@ -1,0 +1,10 @@
+---
+
+ -  hosts: log
+    sudo: yes
+    user: admin
+    roles:
+      - common
+      - nginx
+      - java
+      - elk4

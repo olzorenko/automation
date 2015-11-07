@@ -1,0 +1,8 @@
+---
+
+ - name: kibana start
+   service: name=kibana state=started enabled=yes
+
+ - name: kibana restart
+   service: name=kibana state=restarted
+ - include: /etc/ansible/roles/nginx/handlers/main.yml

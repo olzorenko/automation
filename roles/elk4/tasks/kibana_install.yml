@@ -6,6 +6,15 @@
     - users
     - kibana
 
+<<<<<<< HEAD
+=======
+
+ - name: Display all variables/facts known for a host
+   debug: var={{ ansible_eth1.ipv4.address }}
+   tags:
+    - kibana00
+
+>>>>>>> Finished kibana
  - name: Creating kibana user
    user: name=kibana uid=999 group=kibana
    when: kibanagroupok|success
@@ -17,6 +26,7 @@
    register: kibanadirok
 
  - name: Download Kibana4`s tarball
+<<<<<<< HEAD
    get_url: url="https://download.elastic.co/kibana/kibana/kibana-4.2.0-linux-x64.tar.gz" dest={{ temp_dir }} mode=0777
    register: kibtarok
 
@@ -26,12 +36,35 @@
 #   when: kibanadirok|success and kibtarok|success
    tags:
     - kibanat
+=======
+   get_url: url={{ kibana_url }} dest={{ temp_dir }} mode=0777
+   register: kibtarok
+
+ - name: Untar Kibana`s tarball
+   unarchive: src=/opt/src/{{ kibana_tar}} dest={{ temp_dir }} copy=no owner=kibana group=kibana
+   register: kibanaonplace
+   when: kibanadirok|success and kibtarok|success
+   tags:
+    - kibana
+
+ - name: Move kibana untarred files to /opt/kibana
+   shell: 'cp -r {{ temp_dir }}/kibana-4.2.0-linux-x64/* /opt/kibana' 
+   tags:
+    - kibana
+
+
+ - name: Change permissions for /opt/kibana
+   shell: 'chown -R kibana:kibana /opt/kibana' 
+   tags:
+    - kibana
+>>>>>>> Finished kibana
 
  - name: Allow access to kibana only from localhost 1
    lineinfile: dest={{ kibana_dir }}/config/kibana.yml regexp='^server.host' state=absent
    register: stringrem
 
  - name: Allow access to kibana only from localhost 2
+<<<<<<< HEAD
    lineinfile: 'dest={{ kibana_dir }}/config/kibana.yml insertbefore=BOF line=server.host: "localhost"'
    when: stringrem|success
 
@@ -41,6 +74,17 @@
 
  - name: Download kibana init default script
    get_url: url="https://gist.githubusercontent.com/thisismitch/8b15ac909aed214ad04a/raw/fc5025c3fc499ad8262aff34ba7fde8c87ead7c0/kibana-4.x-default" dest="/etc/default" mode=0755
+=======
+   lineinfile: dest={{ kibana_dir }}/config/kibana.yml insertbefore=BOF line="{{ kibana_line }}" state=present
+   when: stringrem|success
+
+ - name: Download kibana init script
+   get_url: url="https://gist.githubusercontent.com/thisismitch/8b15ac909aed214ad04a/raw/fc5025c3fc499ad8262aff34ba7fde8c87ead7c0/kibana-4.x-init" dest="/etc/init.d/kibana" mode=0755
+   register: kibana_init_ok
+
+ - name: Download kibana init default script
+   get_url: url="https://gist.githubusercontent.com/thisismitch/8b15ac909aed214ad04a/raw/fc5025c3fc499ad8262aff34ba7fde8c87ead7c0/kibana-4.x-default" dest="/etc/default/kibana" mode=0755
+>>>>>>> Finished kibana
    when: kibana_init_ok|success
    register: kibana_in_d_ok
    notify:
