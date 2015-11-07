@@ -8,3 +8,4 @@
     key: "{{ lookup('file', 'user3.pub') }}"
   - name: user4
     key: "{{ lookup('file', 'user4.pub') }}"
+#
