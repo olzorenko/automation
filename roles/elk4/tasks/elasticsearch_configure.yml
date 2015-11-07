@@ -4,3 +4,4 @@
    lineinfile: 'dest=/etc/elasticsearch/elasticsearch.yml line="network.host: localhost"'
    notify:
     - ElasticSearch restart
+#

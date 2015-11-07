@@ -6,3 +6,4 @@
  - name: kibana restart
    service: name=kibana state=restarted
  - include: /etc/ansible/roles/nginx/handlers/main.yml
+#

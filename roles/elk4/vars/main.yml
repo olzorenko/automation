@@ -5,3 +5,4 @@ kibana_dir: /opt/kibana
 kibana_line: "server.host: \\\"localhost\\\""
 kibana_tar: kibana-4.2.0-linux-x64.tar.gz 
 kibana_url: "https://download.elastic.co/kibana/kibana/kibana-4.2.0-linux-x64.tar.gz"
+#
